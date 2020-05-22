@@ -63,8 +63,8 @@ const me = new Person({
   age: 11,
 });
 
-console.log(me.toString());
-console.log(me.name());
+console.log(me.toString())
+console.log(me.name);
 
 /*
   TASK 2
@@ -155,6 +155,7 @@ console.log(student.speak());
 //1- create an Instructor class extending lambdasian
 //2- constructor takes A SINGLE ARG - AN OBject with these KEYS :
 // + all keys 
+
 class Instructor extends Lambdasian {
   constructor(attributes) {
     super(attributes)
@@ -162,13 +163,20 @@ class Instructor extends Lambdasian {
     this.favLanguage = attributes.favLanguage;
     this.catchPhrase = attributes.catchPhrase;
   }
-}
+
   demo(subject){
-    return `Today we are learning about ${this.subject} where subject is the param passed in`
+    return `Today we are learning about ${subject} where subject is the param passed in`;
   }
   grade(student){
-    
+    return `${student.name} receives a perfect score in ${this.favLanguage}`
   }
+}
+const childInstructor = new Instructor ({
+  specialty   : 'redux',
+  favLanguage : 'JavaScript, Python, Elm etc.',
+  catchPhrase : `Don't forget the homies`,
+})
+
 /*
   TASK 5
     - Write a Student class extending Lambdasian.
@@ -184,7 +192,33 @@ class Instructor extends Lambdasian {
         + `PRAssignment` a method that receives a subject as an argument and returns `student.name has submitted a PR for {subject}`
         + `sprintChallenge` similar to PRAssignment but returns `student.name has begun sprint challenge on {subject}`
 */
-class Student {}
+class Student extends Lambdasian {
+  constructor(attributes) {
+    super(attributes)
+    this.previousBackground = attributes.previousBackground;
+    this.className          = attributes.className ;
+    this.favSubjects        = [];
+  }
+  listSubjects(){
+    return `Loving ${this.favSubjects}`;
+  }
+  PRAssignment(subject){
+    return `${student.name} has submitted a PR for ${subject}`;
+  }
+  sprintChallenge(subject){
+    return `${student.name} has begun sprint chanllenge on ${subject}`;
+  }
+}
+
+    const lamdbaStudent = new Student({
+      previousBackground : 'experience before Lambda',
+      className   : 'CS132', 
+      favSubjects : ['HTML', 'CSS', 'JS'],
+    });
+
+console.log(lamdbaStudent.className);
+
+
 
 /*
   TASK 6
@@ -199,7 +233,24 @@ class Student {}
         + `standUp` a method that takes in a slack channel and returns `{name} announces to {channel}, @channel standy times!`
         + `debugsCode` a method that takes in a student object and a subject and returns `{name} debugs {student.name}'s code on {subject}`
 */
-class ProjectManager {}
+class ProjectManager extends Instructor {
+  constructor(attributes) {
+    super(attributes)
+    this.gradClassName = attributes.gradClassName;
+    this.favInstructor = attributes.favInstructor; 
+  }
+    standUp(channel){
+      return `${name} announce to ${channel}, @chanel study time!`;
+    }
+    debugsCode(subject){
+      return `${name} debugs ${student.name}'s code on ${subject}`
+    }
+}
+  const childProjectManager = new Instructor({
+    gradClassName : 'CS1',
+    favInstructor :  'Sean',
+  }); 
+// console.log(childProjectManager.)
 
 /*
   STRETCH PROBLEM (no tests!)
