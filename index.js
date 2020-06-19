@@ -90,12 +90,20 @@ class Car {
  }
  drive(distance){
 
-  if (this.tank < 0 ){
-  //  this.odemeter = this.odemeter +  distance  ;
-  //  this.tank = this.tank - distance;
+  if (this.tank*this.milesPerGallon > distance ){
+    this.odometer += distance
+    this.tank     -= distance/this.milesPerGallon;
+      return `You have driven a total of ${distance} miles`
+  }else{
+    let distanceLeft = distance - (this.tank*this.milesPerGallon)
+    let distanceUsed = this.tank*this.milesPerGallon;
+    this.tank = 0;
+    this.odometer = this.odometer + distanceUsed
+    return `I ran out of fuel at ${this.odometer} miles!`
+    };
   }
  }
-}
+
 
 /*
   TASK 3
@@ -148,7 +156,7 @@ class Instructor extends Lambdasian {
     this.specialty    = attributes.specialty;
     this.favLanguage  = attributes.favLanguage;
     this.catchPhrase  = attributes.catchPhrase;
-    // this.subject      = attributes.subject;
+   
   }
   demo(subject){
     return `Today we are learning about ${subject}`;
@@ -156,6 +164,10 @@ class Instructor extends Lambdasian {
   grade(student, subject){
     return `${student.name} receives a perfect score on ${subject}`; 
   }
+  // gradeStudent(student){
+  //   let score = (Math.floor(Math.random() * 10));
+  //   if ( score )
+  // }
 } 
 
 const childInstructor = new Instructor ({
@@ -182,30 +194,28 @@ const childInstructor = new Instructor ({
 */
 class Student extends Lambdasian {
   constructor(attributes) {
-    super(attributes)
+    super(attributes);
     this.previousBackground = attributes.previousBackground;
     this.className          = attributes.className;
-    this.favSubjects        = [];
-    this.subject            = attributes.subject
+    this.favSubjects        = attributes.favSubjects;
   }
-  listSubject(){
-  return `Loving ${this.favSubjects}`;
-}
-  PRAssignment(){
-    return `${student.name} has submitted a PR for ${this.subject}`;
+
+    listSubjects(){
+    return `Loving ${this.favSubjects.join()}`;
   }
+
+  PRAssignment(subject){
+    return `${this.name} has submitted a PR for ${subject}`;
+  }
+
   sprintChallenge(subject){
-    return `${student.name} has begun sprint chanllenge on ${subject}`;
+    return `${this.name} has begun sprint chanllenge on ${subject}`;
   }
 }
 
-const lamdbaStudent = new Student({
-  previousBackground : 'experience before Lambda',
-  className   : 'CS132', 
-  favSubjects : ['HTML', 'CSS', 'JS'],
-});
+const lamdbaStudent = new Student({ name: "Alex", favLanguage:'english' });
 
-console.log(lamdbaStudent.className);
+lamdbaStudent.PRAssignment('math');
 
 /*
   TASK 6
